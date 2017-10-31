@@ -47,13 +47,30 @@ def proofOfWork(last_proof):
         incrementor += 1
     return incrementor
 
+#def findChains():
+    #per ottenere le blockchain di tutti gli altri nodi
+    #other_chains = []
+    #for node_url in peer_nodes:
+        # Get their chains using a GET request
+        #block = requests.get(node_url + "/blocks").content
+        #block = json.loads(block)
+        #other_chains.append(block)
+    #return other_chains
+
+#def findLastVersion():
+    #other_chains = findChains()
+    #longest_chain = blockchain
+    #for chain in other_chains:
+        #if len(longest_chain) < len(chain):
+            #longest_chain = chain
+    #blockchain = longest_chain
+
 node = Flask(__name__)
 this_node_transactions = []
 miner_addr = 'ajnfkasjfkjshfkajsfhdkafshfuahszlvhfd'
-
-nBlocks = 30
 blockchain = [createGenesisBlock()]
 prev_block = blockchain[0]
+#findLastVersion()
 
 
 @node.route('/trans', methods=['POST'])
@@ -96,8 +113,8 @@ def mine():
 
 @node.route('/blocchi', methods=['GET'])
 def get_blocchi():
-    chain = blockchain
-    for block in chain:
+    chain = []
+    for block in blockchain:
         block_index = str(block.index)
         block_time = str(block.time)
         block_data = str(block.data)
@@ -108,9 +125,12 @@ def get_blocchi():
             "data": block_data,
             "hash": block_hash
         }
-    #chain = json.dumps(chain)
-    return jsonify(chain)
+        chain.append(block)
+    chain = json.dumps(chain)
+    return chain
 node.run()
+
+
 
 ##for i in range(nBlocks):
 #    new_block = createNext(prev_block)
