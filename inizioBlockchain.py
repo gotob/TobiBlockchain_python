@@ -5,8 +5,6 @@ from flask import Flask
 from flask import request
 from flask import jsonify
 
-
-
 class Block():
     def __init__(self, index, data, prev_hash):
         self.index = index
@@ -129,10 +127,6 @@ def get_blocchi():
     chain = json.dumps(chain)
     return chain
 node.run()
-<<<<<<< HEAD
-=======
-
-
 
 ##for i in range(nBlocks):
 #    new_block = createNext(prev_block)
