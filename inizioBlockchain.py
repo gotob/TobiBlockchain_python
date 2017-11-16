@@ -140,4 +140,3 @@ node.run()
 #    prev_block = new_block
 #for i in blockchain:
 #    print i
->>>>>>> 5e2263a993a3e5e239c0b9bf2e3813e56038827d
