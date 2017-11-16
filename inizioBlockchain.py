@@ -96,8 +96,8 @@ def mine():
 
 @node.route('/blocchi', methods=['GET'])
 def get_blocchi():
-    chain = blockchain
-    for block in chain:
+    chain = []
+    for block in blockchain:
         block_index = str(block.index)
         block_time = str(block.time)
         block_data = str(block.data)
@@ -108,13 +108,7 @@ def get_blocchi():
             "data": block_data,
             "hash": block_hash
         }
-    #chain = json.dumps(chain)
-    return jsonify(chain)
+        chain.append(block)
+    chain = json.dumps(chain)
+    return chain
 node.run()
-
-##for i in range(nBlocks):
-#    new_block = createNext(prev_block)
-#    blockchain.append(new_block)
-#    prev_block = new_block
-#for i in blockchain:
-#    print i
